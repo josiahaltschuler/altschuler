@@ -59,46 +59,6 @@ article::after {
 	clear: both;
 }
 
-article {
-	margin-bottom: 55px;
-}
-
-@media screen and (max-width: 600px) {
-	article {
-		margin-bottom: 35px;
-	}
-}
-
-article:first-of-type {
-	margin-top: 80px;
-}
-
-@media screen and (max-width: 600px) {
-	article:first-of-type {
-		margin-top: 20px;
-	}
-}
-
-article:nth-of-type(2) {
-	/* margin-top: 60px; */
-}
-
-@media screen and (max-width: 600px) {
-	article:nth-of-type(2) {
-		margin-top: 30px;
-	}
-}
-
-article:last-of-type {
-	/* margin-bottom: 100px; */
-}
-
-@media screen and (max-width: 600px) {
-	article {
-		/* margin-bottom: 35px; */
-	}
-}
-
 audio, canvas, progress, video {
 	display: inline-block;
 	vertical-align: baseline;
@@ -126,7 +86,7 @@ abbr[title] {
 }
 
 b, strong {
-	/* font-weight: bold; */
+	font-weight: bold;
 }
 
 dfn {
@@ -303,8 +263,52 @@ h2 {
 
 @media screen and (max-width: 600px) {
 	h2 {
+		font-size: 18px;
+	}
+}
+
+
+h1.intro a {
+	font-family: "Montserrat", sans-serif;
+	font-size: 35px;
+	/* line-height: 1; */
+	color: #de2500;
+	text-decoration: none;
+	transition: all 0.5s ease 0s;
+}
+
+h1.intro {
+	font-family: "Montserrat", sans-serif;
+	font-size: 35px;
+}
+
+@media screen and (max-width: 600px) {
+	h1.intro {
+		font-size: 20px;
+		margin-top: 1em;
+	}
+}
+
+.red {
+	color: #de2500;
+}
+
+@media screen and (max-width: 600px) {
+	h1.site-title a {
 		font-size: 22px;
 	}
+}
+
+h1.site-title a:visited {
+	color: #de2500;
+}
+
+h1.site-title a:hover, h1.site-title a:focus, h1.site-title a:active {
+	color: #ff4f24;
+}
+
+h2 {
+	font-family: "Montserrat", sans-serif;
 }
 
 p {
@@ -405,48 +409,6 @@ header {
 	}
 }
 
-h1.intro a {
-	font-family: "Montserrat", sans-serif;
-	font-size: 35px;
-	/* line-height: 1; */
-	color: #de2500;
-	text-decoration: none;
-	transition: all 0.5s ease 0s;
-}
-
-h1.intro {
-	font-family: "Montserrat", sans-serif;
-	font-size: 35px;
-}
-
-@media screen and (max-width: 600px) {
-	h1.intro {
-		font-size: 22px;
-	}
-}
-
-.red {
-	color: #de2500;
-}
-
-@media screen and (max-width: 600px) {
-	h1.site-title a {
-		font-size: 22px;
-	}
-}
-
-h1.site-title a:visited {
-	color: #de2500;
-}
-
-h1.site-title a:hover, h1.site-title a:focus, h1.site-title a:active {
-	color: #ff4f24;
-}
-
-h2 {
-	font-family: "Montserrat", sans-serif;
-}
-
 footer {
 	padding: 20px 0;
 	background: black;
@@ -484,10 +446,6 @@ li>ul, li>ol {
 	margin-bottom: 0;
 	margin-left: 1.5em;
 }
-
-/*--------------------------------------------------------------
-# Navigation
---------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
 ## Links
@@ -625,35 +583,4 @@ nav a:hover {
 
 .clear:after, .entry-content:after, .comment-content:after, header:after, .site-content:after, footer:after {
 	clear: both;
-}
-
-/*--------------------------------------------------------------
-# Content
---------------------------------------------------------------*/
-
-/*--------------------------------------------------------------
-# Media
---------------------------------------------------------------*/
-
-/* Make sure embeds and iframes fit their containers. */
-
-embed, iframe, object {
-	max-width: 100%;
-}
-
-p.gigantic {
-	margin: 0.67em 0 0;
-	font-size: 18px;
-	font-weight: 400;
-	/* line-height: 1.71429; */
-}
-
-@media screen and (max-width: 600px) {
-	p.gigantic {
-		width: 100%;
-	}
-}
-
-ins {
-	background-color: #ffffff;
 }
