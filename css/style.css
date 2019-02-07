@@ -250,6 +250,7 @@ h3 {
 
 @media screen and (max-width: 600px) {
 	h3 {
+		margin-top: 0;
 	}
 }
 
