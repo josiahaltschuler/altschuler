@@ -260,7 +260,7 @@ h1, h1 a, h1 a:visited, h2, h2 a, h2 a:visited, h4, h4 a, h5, h5 a, h6, h6 a {
 }
 
 h1 {
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 
 }
 
@@ -268,17 +268,6 @@ h1 a:hover, h1 a:focus, h2 a:hover, h2 a:focus, h3 a:hover, h3 a:focus, h4 a:hov
 	text-decoration: underline;
 	color: #333333;
 }
-
-h2 {
-	font-size: 30px;
-}
-
-@media screen and (max-width: 600px) {
-	h2 {
-		font-size: 26px;
-	}
-}
-
 
 h1.intro a {
 	font-family: "Montserrat", sans-serif;
@@ -297,7 +286,7 @@ h1.intro {
 @media screen and (max-width: 600px) {
 	h1.intro {
 		font-size: 24px;
-		margin: 1em 0 1.5em;
+		margin: 1em 0 0.5em;
 	}
 }
 
@@ -320,7 +309,14 @@ h1.site-title a:hover, h1.site-title a:focus, h1.site-title a:active {
 }
 
 h2 {
+	font-size: 30px;
 	font-family: "Montserrat", sans-serif;
+}
+
+@media screen and (max-width: 600px) {
+	h2 {
+		font-size: 22px;
+	}
 }
 
 p {
@@ -380,6 +376,12 @@ mark, ins {
 big {
 	font-size: 125%;
 }
+
+/* @media screen and (max-width: 1000px) {
+	br {
+		display: none;
+	}
+} */
 
 /*--------------------------------------------------------------
 # Elements
