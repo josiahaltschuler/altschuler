@@ -249,7 +249,8 @@ h3 {
 }
 
 @media screen and (max-width: 600px) {
-	h3 {
+	h2 {
+		margin-bottom: 15px;
 	}
 }
 
@@ -424,8 +425,8 @@ header {
 
 footer {
 	padding: 20px 0;
-	background: black;
-	color: #888888;
+	/* background: black;
+	color: #888888; */
 }
 
 blockquote:before, blockquote:after, q:before, q:after {
@@ -458,6 +459,29 @@ ol {
 li>ul, li>ol {
 	margin-bottom: 0;
 	margin-left: 1.5em;
+}
+
+.column {
+	float: left;
+	width: 25%;
+	padding: 0 20px;
+}
+
+.column:first-of-type {
+	padding-left: 0;
+}
+
+.column:last-of-type {
+	padding-right: 0;
+}
+
+@media screen and (max-width: 600px) {
+	.column {
+		float: none;
+		width: 100%;
+		padding: 0;
+		margin-bottom: 50px;
+	}
 }
 
 /*--------------------------------------------------------------
