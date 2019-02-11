@@ -259,8 +259,8 @@ h1, h1 a, h1 a:visited, h2, h2 a, h2 a:visited, h4, h4 a, h5, h5 a, h6, h6 a {
 	color: #333333;
 }
 
-h1 {
-	/* text-transform: uppercase; */
+h2 {
+	text-decoration: underline;
 
 }
 
