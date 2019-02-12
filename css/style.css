@@ -378,6 +378,30 @@ big {
 	}
 } */
 
+.column {
+	float: left;
+	width: 33%;
+	padding: 0 20px;
+	margin-bottom: 50px;
+}
+
+.column:first-of-type {
+	padding-left: 0;
+}
+
+.column:last-of-type {
+	padding-right: 0;
+}
+
+@media screen and (max-width: 600px) {
+	.column {
+		float: none;
+		width: 100%;
+		padding: 0;
+	}
+}
+
+
 /*--------------------------------------------------------------
 # Elements
 --------------------------------------------------------------*/
@@ -415,12 +439,6 @@ header {
 	header {
 		margin-bottom: 0;
 	}
-}
-
-footer {
-	padding: 20px 0;
-	/* background: black;
-	color: #888888; */
 }
 
 blockquote:before, blockquote:after, q:before, q:after {
