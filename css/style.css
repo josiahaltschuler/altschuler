@@ -379,11 +379,13 @@ big {
 } */
 
 .column {
-	float: left;
+	/* float: left; */
 	padding: 0 20px;
 	margin-bottom: 50px;
+	width: 100%;
 }
 
+/*
 .column:first-of-type {
 	padding-left: 0;
 	width: 66%;
@@ -393,14 +395,16 @@ big {
 	padding-right: 0;
 	width: 33%;
 }
+*/
 
 @media screen and (max-width: 600px) {
 	.column {
-		float: none;
-		width: 100%;
+		/* float: none; */
+		/* width: 100%; */
 		padding: 0;
 	}
 	
+	/*
 	.column:first-of-type {
 		width: 100%;
 	}
@@ -408,6 +412,7 @@ big {
 	.column:last-of-type {
 		width: 100%;
 	}
+	*/
 }
 
 
