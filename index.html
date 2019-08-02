@@ -11,9 +11,35 @@
 		gtag('config', 'UA-3525542-29');
 	</script>
 	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/postscribe/2.0.8/postscribe.min.js"></script>
+
 	<script>
-	document.addEventListener("DOMContentLoaded", function() { 
-		console.log('test');
+	$(document).ready(function(){
+		$.getJSON('https://api.github.com/users/josiahaltschuler/gists', function(data) {
+			var items = [];
+
+			$.each(data, function(idx, obj) { 
+        		// $.each(obj, function(key, value) {
+					items.push('<p><strong>' + obj.description + '</strong><script src="https://gist.github.com/josiahaltschuler/' + obj.id + '.js"><\/script></p>');
+						// items.push('<p><script src="https://gist.github.com/josiahaltschuler/' + obj.id + '.js"><\/script></p>');
+	        	// });
+
+				// console.log(items);
+    		});
+
+			var code = $('#code')
+
+			// $.each(items, function(key, value) {
+			// 		items.push(key + ": " + value);
+	        // 	});
+
+			// $(code).append(items);
+			postscribe(code, items);
+		});
+		
+
 	});
 	</script>
 
@@ -48,9 +74,9 @@
 			</h1>
 		</article>
 		
-		<div class="column">
+		<div id="code" class="column">
 			<h2>Code</h2>
-			
+			<!--
 			<p>
 				<strong>Upload to a remote server using LFTP</strong>
 				<script src="https://gist.github.com/josiahaltschuler/4605968e8fd59ead18396a91afdf6125.js"></script>
@@ -165,6 +191,7 @@
 				<strong>Find the sum of the even-valued terms in a Fibonacci sequence whose values do not exceed 4,000,000.</strong>
 				<script src="https://gist.github.com/josiahaltschuler/323021df2861fba54cf00606aa2dff3b.js"></script>
 			</p>
+			-->
 		</div>
 
 		<!-- <div class="column">
