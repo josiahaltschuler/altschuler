@@ -21,25 +21,13 @@
 			var items = [];
 
 			$.each(data, function(idx, obj) { 
-        		// $.each(obj, function(key, value) {
-					items.push('<p><strong>' + obj.description + '</strong><script src="https://gist.github.com/josiahaltschuler/' + obj.id + '.js"><\/script></p>');
-						// items.push('<p><script src="https://gist.github.com/josiahaltschuler/' + obj.id + '.js"><\/script></p>');
-	        	// });
-
-				// console.log(items);
+				items.push('<p><strong>' + obj.description + '</strong><script src="https://gist.github.com/josiahaltschuler/' + obj.id + '.js"><\/script></p>');
     		});
 
 			var code = $('#code')
 
-			// $.each(items, function(key, value) {
-			// 		items.push(key + ": " + value);
-	        // 	});
-
-			// $(code).append(items);
 			postscribe(code, items);
 		});
-		
-
 	});
 	</script>
 
