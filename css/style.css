@@ -624,3 +624,7 @@ nav a:hover {
 .clear:after, .entry-content:after, .comment-content:after, header:after, .site-content:after, footer:after {
 	clear: both;
 }
+
+.gist {
+	padding-bottom: 22px;
+}
