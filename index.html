@@ -18,15 +18,14 @@
 	<script>
 	$(document).ready(function(){
 		$.getJSON('https://api.github.com/users/josiahaltschuler/gists', function(data) {
-			var items = [];
+			var gists = '';
 
-			$.each(data, function(idx, obj) { 
-				items.push('<p><strong>' + obj.description + '</strong><script src="https://gist.github.com/josiahaltschuler/' + obj.id + '.js"><\/script></p>');
+			$.each(data, function(idx, obj) {
+				gists += '<strong>' + obj.description + '</strong><script src="https://gist.github.com/josiahaltschuler/' + obj.id + '.js"><\/script>';
     		});
-
 			var code = $('#code')
 
-			postscribe(code, items);
+			postscribe(code, gists);
 		});
 	});
 	</script>
