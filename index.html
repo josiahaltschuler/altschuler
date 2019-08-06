@@ -31,7 +31,8 @@
 
 				gists += '<strong>' + title + '</strong>';
 				hashtags.forEach(function (entry) {
-					gists += '<a href="#">' + entry + '</a>';
+					var link = entry.replace('#', '').toLowerCase();
+					gists += '<a href="./' + link + '">' + entry + '</a>';
 				})
 				gists += '<script src="https://gist.github.com/josiahaltschuler/' + obj.id + '.js"><\/script>';
     		});
