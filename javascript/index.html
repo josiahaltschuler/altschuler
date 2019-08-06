@@ -25,16 +25,18 @@
 				var hashtags = [];
 				var title = obj.description.match(/[^#]*/);
 				if (/#\w+\b/g.test(obj.description)) {
-					var hashtags = obj.description.match(/#\w+\b/g);
 					allHashtags.push(hashtags);
-				}
 
-				gists += '<strong>' + title + '</strong>';
-				hashtags.forEach(function (entry) {
-					var link = entry.replace('#', '').toLowerCase();
-					gists += '<a href="../' + link + '">' + entry + '</a>';
-				})
-				gists += '<script src="https://gist.github.com/josiahaltschuler/' + obj.id + '.js"><\/script>';
+					if (/#JavaScript/.test(obj.description)) {
+						var hashtags = obj.description.match(/#\w+\b/g);
+						gists += '<strong>' + title + '</strong>';
+						hashtags.forEach(function (entry) {
+							var link = entry.replace('#', '').toLowerCase();
+							gists += '<a href="../' + link + '">' + entry + '</a>';
+						})
+						gists += '<script src="https://gist.github.com/josiahaltschuler/' + obj.id + '.js"><\/script>';
+					}
+				}
     		});
 			var code = $('#code')
 			postscribe(code, gists);
