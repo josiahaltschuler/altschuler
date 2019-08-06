@@ -18,24 +18,35 @@
 	<script>
 	$(document).ready(function(){
 		$.getJSON('https://api.github.com/users/josiahaltschuler/gists', function(data) {
+			var allHashtags = '';
 			var gists = '';
-			var allHashtags = [];
+			// var allHashtags = [];
 
 			$.each(data, function(idx, obj) {
 				var hashtags = [];
 				var title = obj.description.match(/[^#]*/);
 				if (/#\w+\b/g.test(obj.description)) {
 					var hashtags = obj.description.match(/#\w+\b/g);
-					allHashtags.push(hashtags);
+					// allHashtags.push(hashtags);
 				}
 
 				gists += '<strong>' + title + '</strong>';
 				hashtags.forEach(function (entry) {
-					var link = entry.replace('#', '').toLowerCase();
-					gists += '<a href="./' + link + '">' + entry + '</a>';
+					// var link = entry.replace('#', '').toLowerCase();
+
+					var id = entry.toString().replace('#', '').toLowerCase();
+					allHashtags += '<a id="' + id + '" href="#">' + entry + '</a>';
+					gists += '<a id="' + id + '" href="#">' + entry + '</a>';
 				})
 				gists += '<script src="https://gist.github.com/josiahaltschuler/' + obj.id + '.js"><\/script>';
     		});
+
+			// allHashtags.forEach(function (entry) {
+				
+			// })
+
+			$('#all-hashtags').append(allHashtags);
+
 			var code = $('#code')
 			postscribe(code, gists);
 		});
@@ -75,7 +86,7 @@
 		
 		<div id="code" class="column">
 			<h2>Code</h2>
-			
+			<div id="all-hashtags"></div>
 			<!--
 			<p>
 				<strong>Upload to a remote server using LFTP</strong>
