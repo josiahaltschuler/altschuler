@@ -2,4 +2,4 @@
 `REVOKE ALTER, ALTER ROUTINE, CREATE, CREATE ROUTINE, CREATE TEMPORARY TABLES, CREATE VIEW, DELETE, DROP, EVENT, EXECUTE, GRANT OPTION, INDEX, INSERT, LOCK TABLES, REFERENCES, SHOW VIEW, TRIGGER, UPDATE ON `my_database`.* FROM `my_username`;`
 
 ### Revoke privileges from a user in
-REVOKE Delete, Insert, Update ON `database_name`.* FROM `username`@`%`;
+`REVOKE Delete, Insert, Update ON `database_name`.* FROM `username`@`%`;`
