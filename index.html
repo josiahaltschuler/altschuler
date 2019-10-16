@@ -1,119 +1,125 @@
 <!DOCTYPE html>
 <html lang="en-US">
-  <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3525542-29"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
 
-      gtag("config", "UA-3525542-29");
-    </script>
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-3525542-29"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag("js", new Date());
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/postscribe/2.0.8/postscribe.min.js"></script>
+		gtag("config", "UA-3525542-29");
+	</script>
 
-    <script>
-      $(document).ready(function() {
-        $.getJSON("https://api.github.com/users/josiahaltschuler/gists?per_page=1000000", function(data) {
-          let allHashtags = [];
-          let allUniqueHashtags = [];
-					let gists = "";
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-          $.each(data, function(idx, obj) {
-            var hashtags = [];
-						var title = obj.description.match(/[^#]*/);
-						
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/postscribe/2.0.8/postscribe.min.js"></script>
 
-            if (/#\w+\b/g.test(obj.description)) {
-              var hashtags = obj.description.match(/#\w+\b/g);
-            }
+	<script>
+		$(document).ready(function () {
+			$.getJSON("https://api.github.com/users/josiahaltschuler/gists?per_page=1000000", function (data) {
+				let allHashtags = [];
+				let allUniqueHashtags = [];
+				let gists = "";
 
-            gists += '<article class="' + hashtags + '">';
-            gists += "<strong>" + title + "</strong>";
+				$.each(data, function (idx, obj) {
+					var hashtags = [];
+					var title = obj.description.match(/[^#]*/);
 
-            hashtags.forEach(function(entry) {
-              var id = entry
-                .toString()
-                .replace("#", "")
-                .toLowerCase();
 
-              allHashtags.push('<a id="' + id + '" class="hashtag" href="#">' + entry + "</a> ");
-              gists += '<a id="' + id + '" class="hashtag" href="#">' + entry + "</a> ";
-            });
+					if (/#\w+\b/g.test(obj.description)) {
+						var hashtags = obj.description.match(/#\w+\b/g);
+					}
 
-            // Remove duplicate hashtags
-            const uniqueSet = new Set(allHashtags);
-            allUniqueHashtags = [...uniqueSet];
+					gists += '<article class="' + hashtags + '">';
+					gists += "<strong>" + title + "</strong>";
 
-            gists += '<script src="https://gist.github.com/josiahaltschuler/' + obj.id + '.js"><\/script>';
-            gists += "</article>";
-          });
+					hashtags.forEach(function (entry) {
+						var id = entry
+							.toString()
+							.replace("#", "")
+							.toLowerCase();
 
-          var code = $("#code");
+						allHashtags.push('<a id="' + id + '" class="hashtag" href="#">' +
+							entry + "</a> ");
+						gists += '<a id="' + id + '" class="hashtag" href="#">' + entry +
+							"</a> ";
+					});
 
-          postscribe(code, gists, {
-            done: function() {
-              $("#all-hashtags").append(allUniqueHashtags);
+					// Remove duplicate hashtags
+					const uniqueSet = new Set(allHashtags);
+					allUniqueHashtags = [...uniqueSet];
 
-              $(".hashtag").click(function(element) {
-                var selectedHash = $(this).attr("id");
+					gists += '<script src="https://gist.github.com/josiahaltschuler/' + obj.id +
+						'.js"><\/script>';
+					gists += "</article>";
+				});
 
-                $("#hashtag-title").html("#" + selectedHash);
+				var code = $("#code");
 
-                $("article").each(function() {
-                  var articleClass = $(this).attr("class");
+				postscribe(code, gists, {
+					done: function () {
+						$("#all-hashtags").append(allUniqueHashtags);
 
-                  if (articleClass.includes(selectedHash)) {
-                    $(this).css("display", "block");
-                  } else {
-                    $(this).css("display", "none");
-                  }
-                });
-                return false;
-              });
-            }
-          });
-        });
-      });
-    </script>
+						$(".hashtag").click(function (element) {
+							var selectedHash = $(this).attr("id");
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+							$("#hashtag-title").html("#" + selectedHash);
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+							$("article").each(function () {
+								var articleClass = $(this).attr("class");
 
-    <title>Altschuler Web Consulting & Development, LLC</title>
-    <link rel="stylesheet" href="./css/style.css" type="text/css" media="all" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet" />
-  </head>
+								if (articleClass.includes(selectedHash)) {
+									$(this).css("display", "block");
+								} else {
+									$(this).css("display", "none");
+								}
+							});
+							return false;
+						});
+					}
+				});
+			});
+		});
+	</script>
 
-  <body>
-    <header role="banner">
-      <div class="container">
-        <nav role="navigation">
-          <div>
-            <ul aria-expanded="false">
-              <li><a href="mailto:josiah.altschuler@gmail.com">Email</a></li>
-              <li><a href="https://www.linkedin.com/in/josiahaltschuler/" target="_blank">LinkedIn</a></li>
-              <li><a href="https://github.com/josiahaltschuler" target="_blank">GitHub</a></li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </header>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <div class="container">
-      <h1 class="intro"><span class="">Altschuler Informatics</span></h1>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <div id="all-hashtags"></div>
-	    
-	<p>&nbsp;</p>
-	    
-      <div id="code" class="column"></div>
-    <!-- .container -->
-  </body>
+	<title>Altschuler Web Consulting & Development, LLC</title>
+	<link rel="stylesheet" href="./css/style.css" type="text/css" media="all" />
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet" />
+</head>
+
+<body>
+	<header role="banner">
+		<div class="container">
+			<nav role="navigation">
+				<div>
+					<ul aria-expanded="false">
+						<li><a href="mailto:josiah.altschuler@gmail.com">Email</a></li>
+						<li><a href="https://www.linkedin.com/in/josiahaltschuler/" target="_blank">LinkedIn</a></li>
+						<li><a href="https://github.com/josiahaltschuler" target="_blank">GitHub</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</header>
+
+	<div class="container">
+		<h1 class="intro"><span class="">Altschuler Informatics</span></h1>
+
+		<div id="all-hashtags"></div>
+
+		<p>&nbsp;</p>
+
+		<div id="code" class="column"></div>
+		<!-- .container -->
+</body>
+
 </html>
