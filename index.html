@@ -25,10 +25,18 @@
 				let allHashtags = [];
 				let allUniqueHashtags = [];
 				let gists = "";
+				let firstTime = true;
+				let firstID = '';
 
 				$.each(data, function (idx, obj) {
 					var hashtags = [];
 					var title = obj.description.match(/[^#]*/);
+
+					if (firstTime) {
+						firstID = obj.id;
+						firstTitle = title;
+						firstTime = false;
+					}
 
 
 					if (/#\w+\b/g.test(obj.description)) {
@@ -36,7 +44,7 @@
 					}
 
 					gists += '<article class="' + hashtags + '">';
-					gists += "<strong>" + title + "</strong>";
+					gists += "<a class='gist-title' href='#' id='" + obj.id + "'>" + title + "</a>";
 
 					hashtags.forEach(function (entry) {
 						var id = entry
@@ -45,7 +53,7 @@
 							.toLowerCase();
 
 						allHashtags.push('<a id="' + id + '" class="hashtag" href="#">' +
-							entry + "</a> ");
+							entry + "</a><br>");
 						gists += '<a id="' + id + '" class="hashtag" href="#">' + entry +
 							"</a> ";
 					});
@@ -54,14 +62,14 @@
 					const uniqueSet = new Set(allHashtags);
 					allUniqueHashtags = [...uniqueSet];
 
-					gists += '<script src="https://gist.github.com/josiahaltschuler/' + obj.id +
-						'.js"><\/script>';
+					// gists += '<script src="https://gist.github.com/josiahaltschuler/' + obj.id +
+					// 	'.js"><\/script>';
 					gists += "</article>";
 				});
 
-				var code = $("#code");
+				var titles = $("#titles");
 
-				postscribe(code, gists, {
+				postscribe(titles, gists, {
 					done: function () {
 						$("#all-hashtags").append(allUniqueHashtags);
 
@@ -70,11 +78,22 @@
 
 							$("#hashtag-title").html("#" + selectedHash);
 
+							$firstTimeArticles = true;
+
 							$("article").each(function () {
 								var articleClass = $(this).attr("class");
 
 								if (articleClass.includes(selectedHash)) {
 									$(this).css("display", "block");
+
+									if ($firstTimeArticles) {
+										firstTitle = $(this).find("a.gist-title").text();
+										firstID = $(this).find("a.gist-title").attr('id');
+
+										$('#code').empty();
+										postscribe('#code', `<h1>${firstTitle}</h1><script src='https://gist.github.com/josiahaltschuler/${firstID}.js'><\/script>`);
+										$firstTimeArticles = false;
+									}
 								} else {
 									$(this).css("display", "none");
 								}
@@ -83,6 +102,15 @@
 						});
 					}
 				});
+
+				$('#titles article a.gist-title').click(function() {
+					$('#code').empty();
+					var id = $(this).attr('id');
+					var gistTitle = $(this).text();
+					postscribe('#code', `<h1>${gistTitle}</h1><script src='https://gist.github.com/josiahaltschuler/${id}.js'><\/script>`);
+				});
+
+				postscribe('#code', `<h1>${firstTitle}</h1><script src='https://gist.github.com/josiahaltschuler/${firstID}.js'><\/script>`);
 			});
 		});
 	</script>
@@ -99,6 +127,8 @@
 <body>
 	<header role="banner">
 		<div class="container">
+			<h1 class="intro"><a href="/"><span class="red">altschuler</span>.io</a></h1>
+			
 			<nav role="navigation">
 				<div>
 					<ul aria-expanded="false">
@@ -112,13 +142,13 @@
 	</header>
 
 	<div class="container">
-		<h1 class="intro"><span class="red">altschuler</span>.io</h1>
 
-		<div id="all-hashtags"></div>
+		<div id="all-hashtags" class="column"></div>
 
-		<p>&nbsp;</p>
+		<div id="titles" class="column"></div>
 
 		<div id="code" class="column"></div>
+	</div>
 		<!-- .container -->
 </body>
 

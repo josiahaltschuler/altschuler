@@ -239,7 +239,7 @@ body, button, input, select, textarea {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	/* margin-bottom: 15px; */
+	margin: 0 0 15px;
 }
 
 h1, h1 a, h1 a:visited, h2, h2 a, h2 a:visited {
@@ -253,19 +253,22 @@ h1 a:hover, h1 a:focus, h2 a:hover, h2 a:focus, h3 a:hover, h3 a:focus, h4 a:hov
 	color: #333333;
 }
 
+h1.intro {
+	font-family: "Montserrat", sans-serif;
+	font-size: 35px;
+	float: left;
+}
+
 h1.intro a {
 	font-family: "Montserrat", sans-serif;
 	font-size: 35px;
 	/* line-height: 1; */
-	//color: #de2500;
+	/* color: #de2500; */
 	text-decoration: none;
 	transition: all 0.5s ease 0s;
 }
 
-h1.intro {
-	font-family: "Montserrat", sans-serif;
-	font-size: 35px;
-}
+
 
 @media screen and (max-width: 600px) {
 	h1.intro {
@@ -302,7 +305,6 @@ h2 {
 
 h3 {
 	font-weight: 300;
-	margin: 1.7em 0 0.3em;
 	font-size: 18px;
 }
 
@@ -381,40 +383,34 @@ big {
 } */
 
 .column {
-	/* float: left; */
-	/* padding: 0 20px; */
-	margin-bottom: 50px;
-	width: 100%;
+	float: left;
+	padding: 0 20px;
+	/* width: 100%; */
 }
 
-/*
-.column:first-of-type {
+
+#all-hashtags.column {
 	padding-left: 0;
-	width: 66%;
+	width: 10%;
 }
 
-.column:last-of-type {
-	padding-right: 0;
-	width: 33%;
+#titles.column {
+	/* padding-right: 0; */
+	width: 20%;
 }
-*/
+
+#code.column {
+	padding-right: 0;
+	width: 70%;
+}
+
 
 @media screen and (max-width: 600px) {
 	.column {
-		/* float: none; */
-		/* width: 100%; */
+		float: none;
+		width: 100%;
 		padding: 0;
-	}
-	
-	/*
-	.column:first-of-type {
-		width: 100%;
-	}
-
-	.column:last-of-type {
-		width: 100%;
-	}
-	*/
+	}	
 }
 
 
