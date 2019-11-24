@@ -179,7 +179,7 @@ python setup.py build_ext -f --inplace
 python structure.py
 ```
 # JavaScript
-### Change date from WordPress REST API to another format using
+### Change date from WordPress REST API to another format using JavaScript
 ```
 var published_date = new Date(iso_format_date);
 var date = published_date.getDate();
