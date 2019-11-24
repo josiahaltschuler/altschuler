@@ -35,6 +35,14 @@ lftp -e 'mirror -c -R /path/to/local/folder /path/to/remote/folder' -u 'your_use
 
 -R means reverse mirror. This will tell lftp to upload from local to remote, instead of download from remote to local.
 
+### Move multiple files into a folder using LFTP mmv command
+```
+mmv -O target_folder myfiles*.JPG
+```
+-O lets you specify a target folder to move to
+
+\* is a wildcard
+
 # Azure
 # WordPress
 ### Add CSS to a WordPress plugin
