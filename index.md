@@ -9,7 +9,7 @@ This will not create a new decompressed file or change the original compressed f
 
 # Azure
 # WordPress
-### Add CSS to a WordPress plugin
+**Add CSS to a WordPress plugin**  
 ```
 function register_my_plugin_scripts() {
   wp_register_style('my-plugin-style', plugins_url('/css/style.css', __FILE__), false, '1.0.0', 'all');
@@ -21,3 +21,12 @@ function enqueue_my_plugin_scripts(){
 }
 add_action('wp_enqueue_scripts', 'enqueue_my_plugin_scripts');
 ```
+**Create shortcode in WordPress**  
+Add the below code to your functions.php file or a plugin.
+```
+function handle_shortcode() {
+    return 'Hello world!';
+}
+add_shortcode('hello_world', 'handle_shortcode');
+```
+Now you can use this on any page or post by adding [hello_world] and it will display "Hello world!"
