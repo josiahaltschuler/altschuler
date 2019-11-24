@@ -178,3 +178,14 @@ python setup.py build_ext -f --inplace
 ```
 python structure.py
 ```
+# JavaScript
+### Change date from WordPress REST API to another format using
+```
+var published_date = new Date(iso_format_date);
+var date = published_date.getDate();
+var month = published_date.getMonth(); 
+var year = published_date.getFullYear();
+
+var new_format_date = month + '/' + date + '/' + year; // This is your new format. It can be anything you want.
+```
+Where iso_format_date is the date received from the WordPress REST API, which is in ISO format (2018-08-23T16:12:54)
