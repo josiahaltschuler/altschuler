@@ -197,3 +197,11 @@ var year = published_date.getFullYear();
 var new_format_date = month + '/' + date + '/' + year; // This is your new format. It can be anything you want.
 ```
 Where iso_format_date is the date received from the WordPress REST API, which is in ISO format (2018-08-23T16:12:54)
+
+### Get the base URL of the current page in JavaScript
+```
+function getBaseUrl() {
+  var re = new RegExp(/^.*\//);
+  return re.exec(window.location.href);
+}
+```
