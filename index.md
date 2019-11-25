@@ -42,9 +42,39 @@ for ((i = 0; i != length; i++)); do
    az storage blob set-tier --account-name wheatgenetics -c rawdata -n ${blobs[i]} --tier Archive
 done
 ```
+
+### Bash script to change Azure blob access tier to 'Archive' in bulk using Azure CLI 
+```
+#!/bin/bash
+# This script changes the access tier to 'Archive' for blobs on Microsoft Azure storage account
+#
+
+blobs=($(az storage blob list --num-results "*" --account-name my_account_name -container-name my_container_name | grep '"name": ' | sed -n -e 's/\"name\": \"//p' | sed -n -e 's/\",//p'))
+length=${#blobs[@]}
+
+for ((i = 0; i != length; i++)); do
+   echo "Changing access tier to Archive for: ${blobs[i]}"
+   az storage blob set-tier --account-name my_account_name -container-name my_container_name --name ${blobs[i]} --tier Archive
+done
+```
+
+### Change the access tier of a blob on Microsoft Azure using the Azure CLI
+```
+az storage blob set-tier --account-name my_account_name --container-name my_container_name --name path/to/file --tier Archive
+```
+
+Where --tier can be set to Archive, Cold or Hot. In this example it is Archive.
+
+path/to/file is the path to the file you want to change, excluding the container name. For example, if your file path is really my_container/path/to/file, remove "my_container" from the path so that it is just path/to/file.
+
 ### Transfer file from local to Azure blob storage using AzCopy on Linux
 ```
 ./azcopy copy "my_file.txt" "https://my-storage-account-name.blob.core.windows.net/my-container-name/path/to/folder/"
+```
+
+### Transfer folder recursively from local to Azure blob storage using AzCopy on Linux
+```
+./azcopy copy "/path/to/my/folder" "https://my-storage-account-name.blob.core.windows.net/my-container-name" --recursive
 ```
 
 # Bioinformatics
@@ -103,6 +133,13 @@ python setup.py build_ext -f --inplace
 ```
 python structure.py
 ```
+
+# HTML
+### HTML telephone link
+```
+<a href="tel:1-123-456-7890">1-123-456-7890</a>
+```
+
 # JavaScript
 ### Change date from WordPress REST API to another format using JavaScript
 ```
@@ -187,12 +224,36 @@ tail -n 200 my_file.txt
 
 Where 200 is the number of lines to display from the end of the file. You can change this number to whatever you want.
 
+### Generate md5 checksums for multiple files
+```
+md5sum * > checksums.md5
+```
+
+### Get the number of cores on a Linux machine
+```
+grep -c ^processor /proc/cpuinfo
+```
+
 ### If rm command gives 'Argument list too long' error message
 ```
 find . -name '*' | xargs rm -f
 ```
 
 This finds all the files in the current directory and pipes them one by one to the rm command.
+
+### If the file list is too long when using the ls command in Linux, pipe it to the more command
+```
+ls /path/to/folder/with/too/many/files | more
+```
+
+This will let you page through the list using the space bar.
+
+### Kill a process in Linux
+```
+kill -9 12345
+```
+
+Where -9 is the kill signal and 12345 is the process ID number.
 
 ### Resume upload of a folder to a remote server using LFTP
 ```
@@ -248,6 +309,11 @@ Where -type f specifies to look for a file. (If it was -type d then it would mea
 find /path/to/directory -type f -exec chmod 664 {} + -o -type d -exec chmod 775 {} +
 ```
 
+### Untar a file in linux
+```
+tar -xvf my_file.tar
+```
+
 ### Upload a folder to a remote server using LFTP
 ```
 lftp -e 'mirror -R /path/to/local/folder /path/to/remote/folder' -u 'your_username,your_password' the-remote-ftp-server.com
@@ -293,6 +359,11 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON <database name>.* TO 'username'@'%';
 ### Revoke all privileges except for SELECT on a MySQL database
 ```
 REVOKE ALTER, ALTER ROUTINE, CREATE, CREATE ROUTINE, CREATE TEMPORARY TABLES, CREATE VIEW, DELETE, DROP, EVENT, EXECUTE, GRANT OPTION, INDEX, INSERT, LOCK TABLES, REFERENCES, SHOW VIEW, TRIGGER, UPDATE ON `my_database`.* FROM `my_username`;
+```
+
+### Revoke privileges from a user in MySQL
+```
+REVOKE Delete, Insert, Update ON `database_name`.* FROM `username`@`%`;
 ```
 
 # PHP
