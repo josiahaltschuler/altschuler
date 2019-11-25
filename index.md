@@ -12,6 +12,11 @@
 </script>
 
 # Azure
+### Transfer file from local to Azure blob storage using AzCopy on Linux
+```
+./azcopy copy "my_file.txt" "https://my-storage-account-name.blob.core.windows.net/my-container-name/path/to/folder/"
+```
+
 # Bioinformatics
 ### How to Install fastStructure on Linux
 The following are instructions on how to install fastStructure (https://github.com/rajanil/fastStructure) on Linux. Make sure you are using Python 2 - not Python 3
@@ -110,6 +115,13 @@ fallocate -l 5GB my_large_file
 
 This will create a 5GB file called my_large_file.
 
+### If rm command gives 'Argument list too long' error message
+```
+find . -name '*' | xargs rm -f
+```
+
+This finds all the files in the current directory and pipes them one by one to the rm command.
+
 ### Resume upload of a folder to a remote server using LFTP
 ```
 lftp -e 'mirror -c -R /path/to/local/folder /path/to/remote/folder' -u 'your_username,your_password' the-remote-ftp-server.com
@@ -126,6 +138,24 @@ mmv -O target_folder myfiles*.JPG
 -O lets you specify a target folder to move to
 
 \* is a wildcard
+
+### Search for a directory in Linux and then save the search results to a file
+```
+find /path/to/directory/to/search -type d -iname '*my_directory_name*' > my_search_results.txt
+```
+
+Where -type d specifies to look for a directory. (If it was -type f then it would mean to look for a file instead)
+
+-iname specifies to make the search case-insensitive.
+
+### Search for a file in Linux and then save the search results to a file
+```
+find /path/to/directory/to/search -type f -iname '*my_file_name*' > my_search_results.txt
+```
+
+Where -type f specifies to look for a file. (If it was -type d then it would mean to look for a directory instead.)
+
+-iname specifies to make the search case-insensitive.
 
 ### rsync from one folder to another recursively
 ```
