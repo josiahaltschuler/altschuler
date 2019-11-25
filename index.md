@@ -12,6 +12,36 @@
 </script>
 
 # Azure
+### Bash script to change access tier of all blobs in a Microsoft Azure storage folder to Archive
+```
+#!/bin/bash
+# This script changes the access tier to "Archive" for all blobs in a folder on a Microsoft Azure storage account
+#
+
+blobs=($(az storage blob list --num-results "*" --account-name <account_name> -c <container_name> | grep -E '"name": "path/to/folder' | sed -n -e 's/\"name\": \"//p' | sed -n -e 's/\",//p'))
+
+length=${#blobs[@]}
+
+for ((i = 0; i != length; i++)); do
+   echo "Changing access tier to Archive for: ${blobs[i]}"
+   az storage blob set-tier --account-name <account_name> -c <container_name> -n ${blobs[i]} --tier Archive
+done
+```
+
+### Bash script to change access tier of blob storage in Azure in bulk and using multiple grep matches
+```
+#!/bin/bash
+# This script changes the access tier for blobs on Microsoft Azure storage account
+#
+
+blobs=($(az storage blob list --num-results "*" --account-name wheatgenetics -c rawdata | grep -E '"name": "bulk/jpoland/genome/wheat/sftp_usask/PGSB_Annotation/xxl_align/twelvelines/batch_17|"name": "bulk/jpoland/genome/wheat/sftp_usask/PGSB_Annotation/xxl_align/twelvelines/batch_18' | sed -n -e 's/\"name\": \"//p' | sed -n -e 's/\",//p'))
+length=${#blobs[@]}
+
+for ((i = 0; i != length; i++)); do
+   echo "Changing access tier to Archive for: ${blobs[i]}"
+   az storage blob set-tier --account-name wheatgenetics -c rawdata -n ${blobs[i]} --tier Archive
+done
+```
 ### Transfer file from local to Azure blob storage using AzCopy on Linux
 ```
 ./azcopy copy "my_file.txt" "https://my-storage-account-name.blob.core.windows.net/my-container-name/path/to/folder/"
@@ -93,6 +123,24 @@ function getBaseUrl() {
 }
 ```
 # Linux
+### Bash script to delete files from current folder if they exist in another folder
+```
+#!/bin/bash
+FILES=*
+
+for f in $FILES
+do
+  echo "Processing $f file..."
+
+  FILE=/path/to/other/folder/$f
+   
+  if test -f "$FILE"; then
+    echo "$FILE exists. Deleting it from this folder."
+    rm -f $f
+  fi
+done
+```
+
 ### Compress a tar file in Linux
 ```
 gzip -9 < my_file.tar > my_file.tar.gz
@@ -100,14 +148,16 @@ gzip -9 < my_file.tar > my_file.tar.gz
 
 This will keep my_file.tar and create my_file.tar.gz
 
-### View the contents of a compressed file in Linux
+### Copy a list of files in Linux
 ```
-gzip -cd my_file.txt.gz
+cp /path/to/file/{file1.txt,file2.txt,file3.txt} /path/to/target/folder/
 ```
 
-Where -c means to write to standard output and -d means to decompress.
+### Copy a range of files
+```
+cp /path/to/folder/my_file_name{1..10}.txt /path/to/target/folder
+```
 
-This will not create a new decompressed file or change the original compressed file in any way.
 ### Put a single file into a subfolder on a remote server using LFTP on the command line
 ```
 lftp -e 'cd my_remote_subfolder; put /path/to/my/local/file.txt; bye' -u 'my_username,my_password' example.com
@@ -129,6 +179,13 @@ do
     (cd "$d" && your-command)
 done
 ```
+
+### Display the last n number of lines of a file in Linux
+```
+tail -n 200 my_file.txt
+```
+
+Where 200 is the number of lines to display from the end of the file. You can change this number to whatever you want.
 
 ### If rm command gives 'Argument list too long' error message
 ```
@@ -168,15 +225,6 @@ Where -type d specifies to look for a directory. (If it was -type f then it woul
 
 -iname specifies to make the search case-insensitive.
 
-### Search for a file in Linux and then save the search results to a file
-```
-find /path/to/directory/to/search -type f -iname '*my_file_name*' > my_search_results.txt
-```
-
-Where -type f specifies to look for a file. (If it was -type d then it would mean to look for a directory instead.)
-
--iname specifies to make the search case-insensitive.
-
 ### rsync from one folder to another recursively
 ```
 rsync -a /folder/to/copy/from/ /folder/to/copy/to
@@ -186,9 +234,65 @@ Where the -a option is a combination flag, standing for "archive," preserving sy
 
 Make sure to keep the ending slash (/) on the source directory. If it's not there the source directory will be created within the target directory, instead of syncing with it.
 
+### Search for a file in Linux and then save the search results to a file
+```
+find /path/to/directory/to/search -type f -iname '*my_file_name*' > my_search_results.txt
+```
+
+Where -type f specifies to look for a file. (If it was -type d then it would mean to look for a directory instead.)
+
+-iname specifies to make the search case-insensitive.
+
 ### Set permissions recursively to all directories and files
 ```
 find /path/to/directory -type f -exec chmod 664 {} + -o -type d -exec chmod 775 {} +
+```
+
+### Upload a folder to a remote server using LFTP
+```
+lftp -e 'mirror -R /path/to/local/folder /path/to/remote/folder' -u 'your_username,your_password' the-remote-ftp-server.com
+```
+
+-R means reverse mirror. This will tell lftp to upload from local to remote, instead of download from remote to local.
+
+### View the contents of a compressed file in Linux
+```
+gzip -cd my_file.txt.gz
+```
+
+Where -c means to write to standard output and -d means to decompress.
+
+This will not create a new decompressed file or change the original compressed file in any way.
+
+# Mac
+### Update Homebrew
+```
+brew update
+```
+
+# MySQL
+### Log in to MySQL, add a new user to a database and set their privileges
+Login to MySQL via command line
+
+```
+mysql -h <hostname> -u <username> -p <database name>
+```
+
+Add a user from MySQL command line
+
+```
+CREATE USER 'username'@'%' IDENTIFIED BY 'password';
+```
+
+Set privileges on database from MySQL command line
+
+```
+GRANT SELECT, INSERT, UPDATE, DELETE ON <database name>.* TO 'username'@'%';
+```
+
+### Revoke all privileges except for SELECT on a MySQL database
+```
+REVOKE ALTER, ALTER ROUTINE, CREATE, CREATE ROUTINE, CREATE TEMPORARY TABLES, CREATE VIEW, DELETE, DROP, EVENT, EXECUTE, GRANT OPTION, INDEX, INSERT, LOCK TABLES, REFERENCES, SHOW VIEW, TRIGGER, UPDATE ON `my_database`.* FROM `my_username`;
 ```
 
 # PHP
@@ -224,6 +328,11 @@ $new_string = str_replace('_', ' ', $string_with_character);
 In this example an underscore (_) is removed from the string and replaced with a space.
 
 # Python
+### Install PySpark on Google Colaboratory
+```
+!pip install pyspark
+```
+
 ### NumPy and SciPy Statistics Cheat Sheet
 **Mean (Average)**  
 The sum of all the numbers divided by the number of numbers.
