@@ -93,7 +93,13 @@ function getBaseUrl() {
 }
 ```
 # Linux
-## gzip
+### Compress a tar file in Linux
+```
+gzip -9 < my_file.tar > my_file.tar.gz
+```
+
+This will keep my_file.tar and create my_file.tar.gz
+
 ### View the contents of a compressed file in Linux
 ```
 gzip -cd my_file.txt.gz
@@ -102,7 +108,6 @@ gzip -cd my_file.txt.gz
 Where -c means to write to standard output and -d means to decompress.
 
 This will not create a new decompressed file or change the original compressed file in any way.
-## lftp
 ### Put a single file into a subfolder on a remote server using LFTP on the command line
 ```
 lftp -e 'cd my_remote_subfolder; put /path/to/my/local/file.txt; bye' -u 'my_username,my_password' example.com
@@ -114,6 +119,16 @@ fallocate -l 5GB my_large_file
 ```
 
 This will create a 5GB file called my_large_file.
+
+### Bash script to go in each directory and run a command in Linux
+```
+#!/bin/bash
+
+for d in *
+do
+    (cd "$d" && your-command)
+done
+```
 
 ### If rm command gives 'Argument list too long' error message
 ```
@@ -138,6 +153,11 @@ mmv -O target_folder myfiles*.JPG
 -O lets you specify a target folder to move to
 
 \* is a wildcard
+
+### One line command to SFTP multiple files in background from a remote server in Linux
+```
+nohup sshpass -p "your-password" sftp your-username@sftp.server.name:path/to/files/*.gz > sftp.log &
+```
 
 ### Search for a directory in Linux and then save the search results to a file
 ```
@@ -179,10 +199,23 @@ $capitalized_string = ucfirst("my string.");
 
 $capitalized_string will be "My string."
 
+### Extract a .tar.gz file in Linux
+```
+tar -xf my_archive_file.tar.gz
+```
+
+Where -x means extract, and f tells it that the filename to extract follows.
+
 ### Extract an array of properties from an array of objects in PHP
 ```
 $my_array_of_properties = array_column($my_array_of_objects, 'the_property_name_to_extract');
 ```
+
+### Print a comma-separated list from an array in PHP
+```
+echo implode(', ', $my_array);
+```
+
 ### Remove character from string in PHP
 ```
 $new_string = str_replace('_', ' ', $string_with_character);
