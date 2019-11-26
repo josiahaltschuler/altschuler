@@ -14,3 +14,7 @@
 [Linux](../linux)
 
 # Mac
+### Update Homebrew
+```
+brew update
+```
