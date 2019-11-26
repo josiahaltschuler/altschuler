@@ -11,6 +11,8 @@
 	gtag("config", "UA-3525542-29");
 </script>
 
+[Linux](./linux)
+
 # Azure
 ### Bash script to change access tier of all blobs in a Microsoft Azure storage folder to Archive
 ```
