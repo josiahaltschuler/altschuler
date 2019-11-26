@@ -11,4 +11,4 @@
 	gtag("config", "UA-3525542-29");
 </script>
 
-[Azure](./azure) [Bioinformatics](./bioinformatics) [Git](./git) [HTML](./html) [JavaScript](./javascript) [Linux](./linux)
+[Azure](./azure) [Bioinformatics](./bioinformatics) [Git](./git) [HTML](./html) [JavaScript](./javascript) [Linux](./linux) [Mac](./mac) [MySQL](./mysql) [PHP](./php) [Python](./python) [SQL](./sql) [WordPress](./wordpress)
