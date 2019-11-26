@@ -14,3 +14,16 @@
 [Linux](../linux)
 
 # Git
+### Add a folder to .gitignore
+To ignore a folder named my_folder add this to your .gitignore file:
+```
+my_folder/
+```
+
+### Merge branch into master branch
+```
+git checkout master
+git merge mybranch
+```
+
+This will merge mybranch into master
