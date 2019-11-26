@@ -168,6 +168,13 @@ hr.dotted {
 ```
 
 # JavaScript
+### Add jQuery to HTML
+```
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+```
+
 ### Change date from WordPress REST API to another format using JavaScript
 ```
 var published_date = new Date(iso_format_date);
@@ -247,6 +254,28 @@ function getBaseUrl() {
 }
 ```
 
+### jQuery to limit number of checkboxes selected to four #jquery
+```
+<form>
+    <input type="checkbox" name="my-checkboxes[]" value="0">
+    <input type="checkbox" name="my-checkboxes[]" value="1">
+    <input type="checkbox" name="my-checkboxes[]" value="2">
+    <input type="checkbox" name="my-checkboxes[]" value="3">
+    <input type="checkbox" name="my-checkboxes[]" value="4">
+    <input type="checkbox" name="my-checkboxes[]" value="5">
+</form>
+
+<script>
+var limit = 4;
+  
+$('form input:checkbox').on('change', function(evt) {
+  if($(this).siblings(':checked').length >= limit) {
+    this.checked = false;
+  }
+});
+</script>
+```
+
 ### Match until a character but not including it, using Regex in JavaScript
 ```
 myMatch = "Match until a character but not including it, using Regex in JavaScript #JavaScript".match(/[^#]*/);
@@ -255,6 +284,16 @@ myMatch = "Match until a character but not including it, using Regex in JavaScri
 Gives you 'Match until a character but not including it, using Regex in JavaScript '
 
 # Linux
+### Add a public SSH key to the remote server for auto-login if the ssh-copy-id command is not available locally #ssh
+```
+ssh myusername@example.com "cat >> ~/.ssh/authorized_keys" < ~/.ssh/id_rsa.pub
+```
+
+### chgrp recursively
+```
+chgrp -R mygroupname /path/to/folder
+```
+
 ### Bash script to delete files from current folder if they exist in another folder
 ```
 #!/bin/bash
@@ -271,6 +310,21 @@ do
     rm -f $f
   fi
 done
+```
+
+### Bash script to go in each directory and run a command in Linux
+```
+#!/bin/bash
+
+for d in *
+do
+    (cd "$d" && your-command)
+done
+```
+
+### chown recursively
+```
+chown -R yourusername /path/to/folder
 ```
 
 ### Compress a tar file in Linux
@@ -290,11 +344,6 @@ cp /path/to/file/{file1.txt,file2.txt,file3.txt} /path/to/target/folder/
 cp /path/to/folder/my_file_name{1..10}.txt /path/to/target/folder
 ```
 
-### Put a single file into a subfolder on a remote server using LFTP on the command line
-```
-lftp -e 'cd my_remote_subfolder; put /path/to/my/local/file.txt; bye' -u 'my_username,my_password' example.com
-```
-
 ### Create a large file using fallocate
 ```
 fallocate -l 5GB my_large_file
@@ -302,14 +351,9 @@ fallocate -l 5GB my_large_file
 
 This will create a 5GB file called my_large_file.
 
-### Bash script to go in each directory and run a command in Linux
+### Count the number of files in a folder #find #wc
 ```
-#!/bin/bash
-
-for d in *
-do
-    (cd "$d" && your-command)
-done
+find . -maxdepth 1 -type f | wc -l
 ```
 
 ### Display the last n number of lines of a file in Linux
@@ -318,6 +362,20 @@ tail -n 200 my_file.txt
 ```
 
 Where 200 is the number of lines to display from the end of the file. You can change this number to whatever you want.
+
+### Do an md5sum check #md5sum
+```
+md5sum -c md5_sums.txt > md5_sums_checked.txt &
+```
+
+-c means read the sums from the file md5_sums.txt
+
+& means do it in the background
+
+### Generate MD5 Checksum on a single file #md5sum
+```
+md5sum yourfilename
+```
 
 ### Generate md5 checksums for multiple files
 ```
@@ -343,12 +401,31 @@ ls /path/to/folder/with/too/many/files | more
 
 This will let you page through the list using the space bar.
 
+### Install md5sum on OSX
+```
+brew install md5sha1sum
+```
+
+You need Homebrew installed to run 'brew' command
+
+After installation you will be able to run the 'md5sum' command
+
 ### Kill a process in Linux
 ```
 kill -9 12345
 ```
 
 Where -9 is the kill signal and 12345 is the process ID number.
+
+### lftp to a remote server #lftp
+```
+lftp -u 'myusername,mypassword' example.com
+```
+
+### Put a single file into a subfolder on a remote server using LFTP on the command line
+```
+lftp -e 'cd my_remote_subfolder; put /path/to/my/local/file.txt; bye' -u 'my_username,my_password' example.com
+```
 
 ### Resume upload of a folder to a remote server using LFTP
 ```
@@ -380,6 +457,15 @@ find /path/to/directory/to/search -type d -iname '*my_directory_name*' > my_sear
 Where -type d specifies to look for a directory. (If it was -type f then it would mean to look for a file instead)
 
 -iname specifies to make the search case-insensitive.
+
+### Secure copy (scp) in Linux
+```
+scp -r -P 32435 username@example.com:/path/to/file . > log_output.txt
+```
+### rsync a remote folder to current directory #rsync
+```
+rsync -avz your_username@example.com:/path/to/folder . > rsync.log
+```
 
 ### rsync from one folder to another recursively
 ```
@@ -556,6 +642,11 @@ UPDATE my_table SET `my_column`=NULL WHERE my_column='0';
 This will replace all values of 0 with NULL in a column called "my_column"
 
 # WordPress
+### Add a widget area in WordPress
+```
+<?php dynamic_sidebar( 'my-widget-area' ); ?>
+```
+
 ### Add CSS to a WordPress plugin
 ```
 function register_my_plugin_scripts() {
@@ -568,6 +659,7 @@ function enqueue_my_plugin_scripts(){
 }
 add_action('wp_enqueue_scripts', 'enqueue_my_plugin_scripts');
 ```
+
 ### Check if there are any posts of a custom post type
 ```
 $args = array('post_type'=>array('my_custom_type'));
@@ -587,6 +679,7 @@ function handle_shortcode() {
 add_shortcode('hello_world', 'handle_shortcode');
 ```
 Now you can use this on any page or post by adding [hello_world] and it will display "Hello world!"
+
 ### Expandable search box with magnifying glass in WordPress
 ```
 <style>
@@ -637,6 +730,41 @@ input::placeholder {
     <input type="search" name="s" id="search" placeholder="Search" value="<?php the_search_query(); ?>" />
 </form>
 ```
+
+### Get an ACF custom field
+```
+<?php the_field('my_field_name'); ?>
+```
+
+### Get the tags for a post (custom post types too) without the tag term being linked
+```
+$terms = wp_get_object_terms( $post->ID,  'event_category' );
+ 
+if ( ! empty( $terms ) ) {
+  if ( ! is_wp_error( $terms ) ) {
+    foreach( $terms as $term ) {
+      echo esc_html( $term->name );
+    }
+  }
+}
+```
+
+### Register a new sidebar area in WordPress
+In functions.php, add:
+
+```
+register_sidebar( array(
+  'name'          => esc_html__( 'Footer column 1', 'fwm' ),
+  'id'            => 'footer-column-1',
+  'description'   => esc_html__( 'Add widgets here.', 'fwm' ),
+  'before_widget' => '<section id="%1$s" class="widget %2$s">',
+  'after_widget'  => '</section>',
+  'before_title'  => '<h2 class="widget-title">',
+  'after_title'   => '</h2>',
+) );
+
+```
+
 ### Shortcode in a WordPress template
 ```
 <?php echo do_shortcode("[the_shortcode]"); ?>
