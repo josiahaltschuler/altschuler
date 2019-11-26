@@ -12,3 +12,9 @@
 </script>
 
 # SQL
+### Replace a value in a table column using SQL
+```
+UPDATE my_table SET `my_column`=NULL WHERE my_column='0';
+```
+
+This will replace all values of 0 with NULL in a column called "my_column"
