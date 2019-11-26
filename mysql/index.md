@@ -12,3 +12,31 @@
 </script>
 
 # MySQL
+### Log in to MySQL, add a new user to a database and set their privileges
+Login to MySQL via command line
+
+```
+mysql -h <hostname> -u <username> -p <database name>
+```
+
+Add a user from MySQL command line
+
+```
+CREATE USER 'username'@'%' IDENTIFIED BY 'password';
+```
+
+Set privileges on database from MySQL command line
+
+```
+GRANT SELECT, INSERT, UPDATE, DELETE ON <database name>.* TO 'username'@'%';
+```
+
+### Revoke all privileges except for SELECT on a MySQL database
+```
+REVOKE ALTER, ALTER ROUTINE, CREATE, CREATE ROUTINE, CREATE TEMPORARY TABLES, CREATE VIEW, DELETE, DROP, EVENT, EXECUTE, GRANT OPTION, INDEX, INSERT, LOCK TABLES, REFERENCES, SHOW VIEW, TRIGGER, UPDATE ON `my_database`.* FROM `my_username`;
+```
+
+### Revoke privileges from a user in MySQL
+```
+REVOKE Delete, Insert, Update ON `database_name`.* FROM `username`@`%`;
+```
