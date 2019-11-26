@@ -13,12 +13,6 @@
 
 [Linux](./linux)
 
-# Mac
-### Update Homebrew
-```
-brew update
-```
-
 # MySQL
 ### Log in to MySQL, add a new user to a database and set their privileges
 Login to MySQL via command line
