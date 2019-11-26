@@ -13,63 +13,6 @@
 
 [Linux](./linux)
 
-# Bioinformatics
-### How to Install fastStructure on Linux
-The following are instructions on how to install fastStructure (https://github.com/rajanil/fastStructure) on Linux. Make sure you are using Python 2 - not Python 3
-
-#### 1. Install required modules
-```
-pip install numpy==1.16.5
-pip install cython==0.27.3
-pip install scipy==1.2.1
-```
-
-#### 2. Install GSL (GNU Scientific Library) module
-Download the GSL module
-```
-wget ftp://ftp.gnu.org/gnu/gsl/gsl-1.9.tar.gz
-tar -xf gsl-1.9.tar.gz
-cd gsl-1.9
-```
-
-  Create a directory where you will install GSL (substitute the directory paths with your own desired paths):  
-```
-mkdir ~/bin/gsl
-./configure --prefix=/homes/altschuler/bin/gsl
-make
-make check
-make install
-```
-
-  Add the following lines to your .bashrc file (substitute the directory paths where you installed gsl):
-```
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/homes/altschuler/bin/gsl/lib
-export CFLAGS="-I/homes/altschuler/bin/gsl/include"
-export LDFLAGS="-L/homes/altschuler/bin/gsl/lib"
-```
-
-  Now source your .bashrc file  
-```
-source ~/.bashrc
-```
-
-#### 3. Install fastStructure
-Change directory to where you want to install fastStructure
-```
-cd ~/scripts
-wget --no-check-certificate https://github.com/rajanil/fastStructure/archive/master.tar.gz
-tar -xf master.tar.gz
-cd fastStructure-master/vars
-python setup.py build_ext -f --inplace
-cd ..
-python setup.py build_ext -f --inplace
-```
-
-#### 4. You should now be able to run structure.py
-```
-python structure.py
-```
-
 # Git
 ### Add a folder to .gitignore
 To ignore a folder named my_folder add this to your .gitignore file:
