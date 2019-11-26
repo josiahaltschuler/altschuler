@@ -134,10 +134,37 @@ python setup.py build_ext -f --inplace
 python structure.py
 ```
 
+# Git
+### Add a folder to .gitignore
+To ignore a folder named my_folder add this to your .gitignore file:
+```
+my_folder/
+```
+
+### Merge branch into master branch
+```
+git checkout master
+git merge mybranch
+```
+
+This will merge mybranch into master
+
 # HTML
 ### HTML telephone link
 ```
 <a href="tel:1-123-456-7890">1-123-456-7890</a>
+```
+
+### Make an hr element dotted
+```
+hr.dotted {
+  border: none;
+  border-top: .1em dotted; /* Change the size of the dots here from .1em to your preferred size */
+  background-color: transparent;
+  height: 1px;
+  margin-bottom: 0;
+  color: black; /* Change this to your preferred color */
+}
 ```
 
 # JavaScript
@@ -152,6 +179,66 @@ var new_format_date = month + '/' + date + '/' + year; // This is your new forma
 ```
 Where iso_format_date is the date received from the WordPress REST API, which is in ISO format (2018-08-23T16:12:54)
 
+### Find the sum of the even-valued terms in a Fibonacci sequence whose values do not exceed 4,000,000 in JavaScript
+```
+/**
+ * @file Even Fibonacci Numbers
+ * @author Josiah Altschuler <josiah.altschuler@gmail.com>
+ *
+ * The following code finds the sum of the even-valued terms in a Fibonacci sequence
+ * whose values do not exceed 4,000,000. The result is 4,613,732.
+ *
+ * The solution is found by chaining three functions together:
+ * 1. fibonacci() is a custom function that takes in a maximum number parameter, and
+ *    returns a Fibonacci sequence array consisting of values less than or equal to 
+ *    that number.
+ * 2. A filter function is called on the resulting array from fibonacci() to filter
+ *    out odd numbers, keeping the even ones.
+ * 3. A reduce function is called on the resulting array from the filter to sum up all
+ *    values.
+ *
+ * The code could be made more extensible by putting everything into a class. The
+ * fibonacci() function could be one method, and other methods could be built to
+ * filter even values or to sum all values of the array. This will allow for more
+ * modularized unit testing and the class could also be extended as a subclass.
+ */
+
+/**
+ * Return an array consisting of a Fibonacci sequence whose values do not exceed a maximum value.
+ *
+ * @param {Number} maxValue - Maximum value allowed for the Fibonacci sequence.
+ * 
+ * @return {Array} A Fibonacci sequence whose values do not exceed a given maximum value (maxValue).
+ */
+const fibonacci = maxValue => {
+  let arr = [0, 1]; // Start with a Fibnacci base sequence of 0, 1
+  let i = 2; // Start counting at the third value of the Fibonacci sequence
+  
+  while (arr[arr.length-1] <= maxValue) {
+    arr[i] = arr[i-2] + arr[i-1];
+    i++;
+  }
+  arr.pop();
+  
+  return arr;
+};
+
+// Run the fibonacci() function. Then filter the resulting array for even values, and then get the sum of those values. 
+console.log(fibonacci(4000000).filter((val) => val % 2 === 0).reduce((a, b) => a + b));
+
+
+// Jasmine unit test of the fibonacci() function
+describe('fibonacci', function() {
+  it('should do fibonacci', () => {
+    expect(fibonacci(-1)).toEqual([0]);
+    expect(fibonacci(0)).toEqual([0]);
+    expect(fibonacci(1)).toEqual([0, 1, 1]);
+    expect(fibonacci(2)).toEqual([0, 1, 1, 2]);
+    expect(fibonacci(10)).toEqual([0, 1, 1, 2, 3, 5, 8]);
+  });
+});
+```
+
 ### Get the base URL of the current page in JavaScript
 ```
 function getBaseUrl() {
@@ -159,6 +246,14 @@ function getBaseUrl() {
   return re.exec(window.location.href);
 }
 ```
+
+### Match until a character but not including it, using Regex in JavaScript
+```
+myMatch = "Match until a character but not including it, using Regex in JavaScript #JavaScript".match(/[^#]*/);
+```
+
+Gives you 'Match until a character but not including it, using Regex in JavaScript '
+
 # Linux
 ### Bash script to delete files from current folder if they exist in another folder
 ```
