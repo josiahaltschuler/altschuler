@@ -167,6 +167,42 @@ hr.dotted {
 }
 ```
 
+### Make Font Awesome icons have a circle background
+```
+<style>
+#social [class*="fab fa-"] {
+ 	background-color: #2A00FF;
+ 	border-radius: 40px;
+ 	color: #fff;
+ 	height: 40px;
+  	line-height: 40px;
+ 	margin: auto 3px;
+ 	width: 40px;
+ 	font-size: 24px;
+  	text-align: center;
+}
+</style>
+
+<div id="social">
+	<i class="fab fa-instagram"></i>
+	<i class="fab fa-facebook-f"></i>
+	<i class="fab fa-twitter"></i>
+</div>
+```
+
+### Make the bootstrap sub menu full-width
+```
+body {
+  overflow-x: hidden;
+}
+
+
+ul.dropdown-menu {
+  padding: 0 1000em;
+  margin: 0 -1000em;
+}
+```
+
 # JavaScript
 ### Add jQuery to HTML
 ```
@@ -254,7 +290,24 @@ function getBaseUrl() {
 }
 ```
 
-### jQuery to limit number of checkboxes selected to four #jquery
+### If only the home page displays and no subpages display on an Ubuntu server web site
+1. Change AllowOverride None to AllowOverride All here in /etc/apache2/apache2.conf:
+
+```
+<Directory /var/www/>
+  Options Indexes FollowSymLinks
+  AllowOverride All
+  Require all granted
+</Directory>
+```
+
+2. Do this command: sudo a2enmod rewrite
+
+3. Restart Apache: sudo service apache2 restart
+
+\* If it’s a wordpress site try flushing the permalinks first *
+
+### jQuery to limit number of checkboxes selected to four
 ```
 <form>
     <input type="checkbox" name="my-checkboxes[]" value="0">
@@ -284,7 +337,20 @@ myMatch = "Match until a character but not including it, using Regex in JavaScri
 Gives you 'Match until a character but not including it, using Regex in JavaScript '
 
 # Linux
-### Add a public SSH key to the remote server for auto-login if the ssh-copy-id command is not available locally #ssh
+### A useful wget command for getting a folder from an FTP site
+```
+nohup wget -r -c -nH --cut-dirs=2 -o your_output_file.txt -l 0 --ftp-user=yourusername --ftp-password='yourpassword' ftp.example.com:/path/to/the/folder &
+```
+
+nohup means ignore the HUP (hangup) command (like when your computer logs out) 
+-r means recursive
+-c means to continue files where they left off
+-o means create an output file for sterr
+-l 0 means go into nested subfolder levels infinitely
+-nH --cut-dirs=2 means cut two levels of parent directories from the downloaded files
+& means run it in the background
+
+### Add a public SSH key to the remote server for auto-login if the ssh-copy-id command is not available locally
 ```
 ssh myusername@example.com "cat >> ~/.ssh/authorized_keys" < ~/.ssh/id_rsa.pub
 ```
@@ -351,7 +417,7 @@ fallocate -l 5GB my_large_file
 
 This will create a 5GB file called my_large_file.
 
-### Count the number of files in a folder #find #wc
+### Count the number of files in a folder
 ```
 find . -maxdepth 1 -type f | wc -l
 ```
@@ -363,7 +429,7 @@ tail -n 200 my_file.txt
 
 Where 200 is the number of lines to display from the end of the file. You can change this number to whatever you want.
 
-### Do an md5sum check #md5sum
+### Do an md5sum check
 ```
 md5sum -c md5_sums.txt > md5_sums_checked.txt &
 ```
@@ -372,7 +438,7 @@ md5sum -c md5_sums.txt > md5_sums_checked.txt &
 
 & means do it in the background
 
-### Generate MD5 Checksum on a single file #md5sum
+### Generate MD5 Checksum on a single file
 ```
 md5sum yourfilename
 ```
@@ -386,6 +452,10 @@ md5sum * > checksums.md5
 ```
 grep -c ^processor /proc/cpuinfo
 ```
+
+### How to fix 'su: can't run /sbin/nologin' on Synology NAS device
+Edit /etc/passwd and replace '/sbin/nologin' with '/bin/sh' for the user you are trying to su to.
+
 
 ### If rm command gives 'Argument list too long' error message
 ```
@@ -417,15 +487,29 @@ kill -9 12345
 
 Where -9 is the kill signal and 12345 is the process ID number.
 
-### lftp to a remote server #lftp
+### lftp to a remote server
 ```
 lftp -u 'myusername,mypassword' example.com
+```
+
+### Lorem Ipsum text example
+```
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 ```
 
 ### Put a single file into a subfolder on a remote server using LFTP on the command line
 ```
 lftp -e 'cd my_remote_subfolder; put /path/to/my/local/file.txt; bye' -u 'my_username,my_password' example.com
 ```
+
+### Put Linux job in background and disown it
+Hit CTRL-Z
+
+Type 'bg'
+
+Get the job number by typing 'jobs -l'
+
+Type 'disown 12345' or whatever your job number is. This will be as if you ran the command with 'nohup'
 
 ### Resume upload of a folder to a remote server using LFTP
 ```
@@ -462,7 +546,7 @@ Where -type d specifies to look for a directory. (If it was -type f then it woul
 ```
 scp -r -P 32435 username@example.com:/path/to/file . > log_output.txt
 ```
-### rsync a remote folder to current directory #rsync
+### rsync a remote folder to current directory
 ```
 rsync -avz your_username@example.com:/path/to/folder . > rsync.log
 ```
@@ -660,6 +744,89 @@ function enqueue_my_plugin_scripts(){
 add_action('wp_enqueue_scripts', 'enqueue_my_plugin_scripts');
 ```
 
+### An example of making ACF relationship fields of two custom post types bidirectional
+```
+/**
+* This is to set up the ACF bidirectional relationship between the Artist and Exhibition custom post types.
+* Put this in functions.php of your WordPress theme.
+* The code was taken from here: https://www.advancedcustomfields.com/resources/bidirectional-relationships/
+*/
+
+function bidirectional_acf_update_value( $value, $post_id, $field  ) {
+	// vars
+	$field_name = $field['name'];
+	$field_key = $field['key'];
+	$global_name = 'is_updating_' . $field_name;
+
+	// bail early if this filter was triggered from the update_field() function called within the loop below
+	// - this prevents an infinite loop
+
+	if( !empty($GLOBALS[ $global_name ]) ) return $value;
+  
+	// set global variable to avoid inifite loop
+	// - could also remove_filter() then add_filter() again, but this is simpler
+
+	$GLOBALS[ $global_name ] = 1;
+
+	// loop over selected posts and add this $post_id
+  if( is_array($value) ) {
+		foreach( $value as $post_id2 ) {
+
+      // load existing related posts
+			$value2 = get_field($field_name, $post_id2, false);
+
+			// allow for selected posts to not contain a value
+			if( empty($value2) ) {	
+				$value2 = array();
+			}
+
+			// bail early if the current $post_id is already found in selected post's $value2
+			if( in_array($post_id, $value2) ) continue;
+
+			// append the current $post_id to the selected post's 'related_posts' value
+			$value2[] = $post_id;	
+
+			// update the selected post's value (use field's key for performance)
+			update_field($field_key, $value2, $post_id2);
+		}
+	}
+
+	// find posts which have been removed
+	$old_value = get_field($field_name, $post_id, false);
+
+	if( is_array($old_value) ) {	
+		foreach( $old_value as $post_id2 ) {
+
+      // bail early if this value has not been removed
+			if( is_array($value) && in_array($post_id2, $value) ) continue;
+
+			// load existing related posts
+			$value2 = get_field($field_name, $post_id2, false);
+
+			// bail early if no value
+			if( empty($value2) ) continue;
+
+			// find the position of $post_id within $value2 so we can remove it
+			$pos = array_search($post_id, $value2);
+
+			// remove
+			unset( $value2[ $pos] );
+
+			// update the un-selected post's value (use field's key for performance)
+			update_field($field_key, $value2, $post_id2);
+		}
+	}
+
+	// reset global varibale to allow this filter to function as per normal
+	$GLOBALS[ $global_name ] = 0;
+
+  // return
+  return $value;
+}
+
+add_filter('acf/update_value/name=artists_exhibitions', 'bidirectional_acf_update_value', 10, 3);
+```
+
 ### Check if there are any posts of a custom post type
 ```
 $args = array('post_type'=>array('my_custom_type'));
@@ -729,6 +896,24 @@ input::placeholder {
 <form action="/" method="get">
     <input type="search" name="s" id="search" placeholder="Search" value="<?php the_search_query(); ?>" />
 </form>
+```
+
+### Get all the posts of a custom post type in WordPress
+```
+<?php 
+$args = array(
+    'post_type'=> 'my_custom_post_type'
+);              
+
+$query = new WP_Query($args);
+
+if ($query->have_posts()) {
+    while ($query->have_posts()) {
+        $query->the_post();
+        // Now you can do something like print out the title using the_title();
+    }
+}
+?>
 ```
 
 ### Get an ACF custom field
