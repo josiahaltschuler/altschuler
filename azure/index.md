@@ -11,7 +11,7 @@
 	gtag("config", "UA-3525542-29");
 </script>
 
-[Linux](../linux)
+Azure | [Bioinformatics](../bioinformatics) | [Git](../git) | [HTML](../html) | [JavaScript](../javascript) | [Linux](../linux) | [Mac](../mac) | [MySQL](../mysql) | [PHP](../php) | [Python](../python) | [SQL](../sql) | [WordPress](../wordpress)
 
 # Azure
 ### Bash script to change access tier of all blobs in a Microsoft Azure storage folder to Archive
