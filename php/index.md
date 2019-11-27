@@ -11,7 +11,7 @@
 	gtag("config", "UA-3525542-29");
 </script>
 
-[Linux](../linux)
+[Azure](../azure) | [Bioinformatics](../bioinformatics) | [Git](../git) | [HTML](../html) | [JavaScript](../javascript) | [Linux](../linux) | [Mac](../mac) | [MySQL](../mysql) | PHP | [Python](../python) | [SQL](../sql) | [WordPress](../wordpress)
 
 # PHP
 ### Capitalize the first word of a string in PHP
