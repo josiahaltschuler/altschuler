@@ -19,12 +19,12 @@
 nohup wget -r -c -nH --cut-dirs=2 -o your_output_file.txt -l 0 --ftp-user=yourusername --ftp-password='yourpassword' ftp.example.com:/path/to/the/folder &
 ```
 
-nohup means ignore the HUP (hangup) command (like when your computer logs out) 
--r means recursive
--c means to continue files where they left off
--o means create an output file for sterr
--l 0 means go into nested subfolder levels infinitely
--nH --cut-dirs=2 means cut two levels of parent directories from the downloaded files
+nohup means ignore the HUP (hangup) command (like when your computer logs out)  
+-r means recursive  
+-c means to continue files where they left off  
+-o means create an output file for sterr  
+-l 0 means go into nested subfolder levels infinitely  
+-nH --cut-dirs=2 means cut two levels of parent directories from the downloaded files  
 & means run it in the background
 
 ### Add a public SSH key to the remote server for auto-login if the ssh-copy-id command is not available locally
