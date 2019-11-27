@@ -11,7 +11,7 @@
 	gtag("config", "UA-3525542-29");
 </script>
 
-[Linux](../linux)
+[Azure](../azure) | [Bioinformatics](../bioinformatics) | Git | [HTML](../html) | [JavaScript](../javascript) | [Linux](../linux) | [Mac](../mac) | [MySQL](../mysql) | [PHP](../php) | [Python](../python) | [SQL](../sql) | [WordPress](../wordpress)
 
 # Git
 ### Add a folder to .gitignore
