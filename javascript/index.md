@@ -11,7 +11,7 @@
 	gtag("config", "UA-3525542-29");
 </script>
 
-[Linux](../linux)
+[Azure](../azure) | [Bioinformatics](../bioinformatics) | [Git](../git) | [HTML](../html) | JavaScript | [Linux](../linux) | [Mac](../mac) | [MySQL](../mysql) | [PHP](../php) | [Python](../python) | [SQL](../sql) | [WordPress](../wordpress)
 
 # JavaScript
 ### Add jQuery to HTML
