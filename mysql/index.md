@@ -11,6 +11,8 @@
 	gtag("config", "UA-3525542-29");
 </script>
 
+[Azure](../azure) | [Bioinformatics](../bioinformatics) | [Git](../git) | [HTML](../html) | [JavaScript](../javascript) | [Linux](../linux) | [Mac](../mac) | MySQL | [PHP](../php) | [Python](../python) | [SQL](../sql) | [WordPress](../wordpress)
+
 # MySQL
 ### Log in to MySQL, add a new user to a database and set their privileges
 Login to MySQL via command line
