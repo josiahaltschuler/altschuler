@@ -11,6 +11,8 @@
 	gtag("config", "UA-3525542-29");
 </script>
 
+[Azure](../azure) | [Bioinformatics](../bioinformatics) | [Git](../git) | [HTML](../html) | [JavaScript](../javascript) | Linux | [Mac](../mac) | [MySQL](../mysql) | [PHP](../php) | [Python](../python) | [SQL](../sql) | [WordPress](../wordpress)
+
 # Linux
 ### A useful wget command for getting a folder from an FTP site
 ```
