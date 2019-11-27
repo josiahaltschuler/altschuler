@@ -14,6 +14,39 @@
 [Linux](../linux)
 
 # WordPress
+### Add a setting to the WordPress Customizer
+The following adds a panel called "Wheat Colors" and within that panel it adds setting to control the background color of the theme footer. It sets the default color to #333333. This code should be added to the functions.php file, or in a separate file called customizer.php, which should get included in the functions.php file.
+
+```
+function wheat_customize_register( $wp_customize ) {
+	$wp_customize->add_section( 'wheat_colors' , array(
+		'title'      => 'Wheat Colors',
+		'priority'   => 1000,
+	) );
+
+	$wp_customize->add_setting( 'wheat_footer_background_color' , array(
+		'default'     => '#333333',
+		'transport'   => 'refresh',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'wheat_footer_background_color', array(
+		'label'        => 'Footer Background Color',
+		'section'    => 'wheat_colors',
+		'settings'   => 'wheat_footer_background_color',
+	) ) );
+}
+add_action( 'customize_register', 'wheat_customize_register' );
+
+function wheat_customizer_css() {
+?>
+	<style type="text/css">
+		.site-footer { background-color: <?php echo get_theme_mod('wheat_footer_background_color', '#333333'); ?>; }
+	</style>
+<?php
+}
+add_action( 'wp_head', 'wheat_customizer_css');
+```
+
 ### Add a widget area in WordPress
 ```
 <?php dynamic_sidebar( 'my-widget-area' ); ?>
