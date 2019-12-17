@@ -14,6 +14,11 @@
 [Azure](../azure) | [Bioinformatics](../bioinformatics) | [Git](../git) | [HTML](../html) | [JavaScript](../javascript) | [Linux](../linux) | [Mac](../mac) | MySQL | [PHP](../php) | [Python](../python) | [SQL](../sql) | [WordPress](../wordpress)
 
 # MySQL
+### Flush privileges
+```
+FLUSH PRIVILEGES;
+```
+
 ### Log in to MySQL, add a new user to a database and set their privileges
 Login to MySQL via command line
 
