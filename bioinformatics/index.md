@@ -69,3 +69,10 @@ python setup.py build_ext -f --inplace
 ```
 python structure.py
 ```
+
+### How to Submit GBS Data to the NCBI Sequence Read Archive (SRA)
+There are three steps in submitting sequence data to the NCBI Sequence Read Archive (SRA):
+
+1. Create a BioProject submission.
+2. Create a BioSample submission.
+3. Create a Sequence Read Archive submission.
